@@ -1,29 +1,29 @@
 jobs:
-  - name: dataworks-repo-template-docker-pr
+  - name: cloudwatch-agent-pr
     plan:
-      - get: dataworks-repo-template-docker-pr
+      - get: cloudwatch-agent-pr
         trigger: true
         version: every
-      - put: dataworks-repo-template-docker-pr
+      - put: cloudwatch-agent-pr
         params:
-          path: dataworks-repo-template-docker-pr
+          path: cloudwatch-agent-pr
           status: pending
       - .: (( inject meta.plan.terraform-bootstrap ))
         input_mapping:
-          dataworks-repo-template-docker: dataworks-repo-template-docker-pr
+          cloudwatch-agent: cloudwatch-agent-pr
       - .: (( inject meta.plan.terraform-plan ))
         input_mapping:
-          dataworks-repo-template-docker: dataworks-repo-template-docker-pr
+          cloudwatch-agent: cloudwatch-agent-pr
         params:
           TF_WORKSPACE: "management"
           DETAILED_EXITCODE: ""
         on_failure:
-          put: dataworks-repo-template-docker-pr
+          put: cloudwatch-agent-pr
           params:
-            path: dataworks-repo-template-docker-pr
+            path: cloudwatch-agent-pr
             status: failure
         on_success:
-          put: dataworks-repo-template-docker-pr
+          put: cloudwatch-agent-pr
           params:
-            path: dataworks-repo-template-docker-pr
+            path: cloudwatch-agent-pr
             status: success
