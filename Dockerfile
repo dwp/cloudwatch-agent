@@ -16,10 +16,8 @@ RUN curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/${TARGETARCH:
     rm -rf /opt/aws/amazon-cloudwatch-agent/bin/config-downloader && \
     mkdir cwagent
 
-WORKDIR cwagent
-
-COPY entrypoint.sh entrypoint.sh
-RUN chmod +x entrypoint.sh
+COPY entrypoint.sh /bin/entrypoint.sh
+RUN chmod +x /bin/entrypoint.sh
 
 ENV RUN_IN_CONTAINER="True"
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT [ "/bin/entrypoint.sh" ]
