@@ -5,8 +5,13 @@ FROM ubuntu:latest as build
 ARG TARGETARCH
 
 RUN apt-get update &&  \
-    apt-get install -y ca-certificates curl && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y ca-certificates curl  
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get install -y awscli
+
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/${TARGETARCH:-$(dpkg --print-architecture)}/latest/amazon-cloudwatch-agent.deb && \
     dpkg -i -E amazon-cloudwatch-agent.deb && \
