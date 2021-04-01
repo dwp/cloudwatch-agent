@@ -1,12 +1,12 @@
 #!/bin/sh
 set -e
 echo "INFO: Checking container configuration..."
-if [ -z "${CWAGENT_CONFIG_S3_BUCKET}" -o -z "${CWAGENT_CONFIG_S3_PREFIX}" ]; then
-    echo "ERROR: CWAGENT_CONFIG_S3_BUCKET and CWAGENT_CONFIG_S3_PREFIX environment variables must be provided"
+if [ -z "${CLOUDWATCH-AGENT_CONFIG_S3_BUCKET}" -o -z "${CLOUDWATCH-AGENT_CONFIG_S3_PREFIX}" ]; then
+    echo "ERROR: CLOUDWATCH-AGENT_CONFIG_S3_BUCKET and CLOUDWATCH-AGENT_CONFIG_S3_PREFIX environment variables must be provided"
     exit 1
 fi
 
-S3_URI="s3://${CWAGENT_CONFIG_S3_BUCKET}/${CWAGENT_CONFIG_S3_PREFIX}"
+S3_URI="s3://${CLOUDWATCH-AGENT_CONFIG_S3_BUCKET}/${CLOUDWATCH-AGENT_CONFIG_S3_PREFIX}"
 
 # If either of the AWS credentials variables were provided, validate them
 if [ -n "${AWS_ACCESS_KEY_ID}${AWS_SECRET_ACCESS_KEY}" ]; then
@@ -45,7 +45,7 @@ else
     echo "INFO: Using attached IAM roles/instance profiles to authenticate with S3 as no AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY have been provided"
 fi
 
-if [ -f "/cwagent/cwagent-${ENV}.json" ]; then
+if [ -f "/cwagent/config.json" ]; then
     echo "Config mounted as Volume from S3"
 else
     echo "INFO: Copying cwagent configuration file(s) from ${S3_URI} to /cwagent..."
