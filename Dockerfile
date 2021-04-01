@@ -9,7 +9,7 @@ RUN apt-get update &&  \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get install -y awscli systemd
+RUN apt-get install -y awscli
 
 RUN rm -rf /var/lib/apt/lists/*
 
