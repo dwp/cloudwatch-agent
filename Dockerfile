@@ -1,4 +1,4 @@
-FROM ubuntu:latest as build
+FROM ubuntu:20.04 as build
 
 # NOTE: This arg will be populated by docker buildx
 # https://docs.docker.com/engine/reference/builder/#automatic-platform-args-in-the-global-scope

@@ -45,11 +45,11 @@ else
     echo "INFO: Using attached IAM roles/instance profiles to authenticate with S3 as no AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY have been provided"
 fi
 
-if [ -f "/cwagent/config.json" ]; then
+if [ -f "/etc/cwagentconfig/config.json" ]; then
     echo "Config mounted as Volume from S3"
 else
-    echo "INFO: Copying cwagent configuration file(s) from ${S3_URI} to /cwagent..."
-    aws ${PROFILE_OPTION} s3 sync ${S3_URI}/ /cwagent/
+    echo "INFO: Copying cwagent configuration file(s) from ${S3_URI} to /etc/cwagentconfig..."
+    aws ${PROFILE_OPTION} s3 sync ${S3_URI}/ /etc/cwagentconfig/
 fi
 
 if [ !"${LOG_LEVEL}" ]; then
@@ -58,5 +58,4 @@ fi
 
 echo "INFO: Starting cwagent..."
 
-exec /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config  \
-    -c file:/cwagent/config.json -s
+exec /opt/aws/amazon-cloudwatch-agent/bin/start-amazon-cloudwatch-agent
