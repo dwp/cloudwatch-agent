@@ -57,5 +57,6 @@ if [ !"${LOG_LEVEL}" ]; then
 fi
 
 echo "INFO: Starting cwagent..."
-exec /opt/aws/amazon-cloudwatch-agent/bin/start-amazon-cloudwatch-agent \
-    -c file:/cwagent/cwagent-${ENV}.json -s
+
+exec /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config  \
+    -c file:/cwagent/config.json -s
