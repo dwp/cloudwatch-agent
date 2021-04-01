@@ -60,6 +60,3 @@ echo "INFO: Starting cwagent..."
 
 exec /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config  \
     -c file:/cwagent/config.json -s
-
-
- 
