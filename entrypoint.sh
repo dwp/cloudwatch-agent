@@ -1,12 +1,12 @@
 #!/bin/sh
 set -e
 echo "INFO: Checking container configuration..."
-if [ -z "${CLOUDWATCH-AGENT_CONFIG_S3_BUCKET}" -o -z "${CLOUDWATCH-AGENT_CONFIG_S3_PREFIX}" ]; then
-    echo "ERROR: CLOUDWATCH-AGENT_CONFIG_S3_BUCKET and CLOUDWATCH-AGENT_CONFIG_S3_PREFIX environment variables must be provided"
+if [ -z "${CLOUDWATCH_AGENT_CONFIG_S3_BUCKET}" -o -z "${CLOUDWATCH_AGENT_CONFIG_S3_PREFIX}" ]; then
+    echo "ERROR: CLOUDWATCH_AGENT_CONFIG_S3_BUCKET and CLOUDWATCH_AGENT_CONFIG_S3_PREFIX environment variables must be provided"
     exit 1
 fi
 
-S3_URI="s3://${CLOUDWATCH-AGENT_CONFIG_S3_BUCKET}/${CLOUDWATCH-AGENT_CONFIG_S3_PREFIX}"
+S3_URI="s3://${CLOUDWATCH_AGENT_CONFIG_S3_BUCKET}/${CLOUDWATCH_AGENT_CONFIG_S3_PREFIX}"
 
 # If either of the AWS credentials variables were provided, validate them
 if [ -n "${AWS_ACCESS_KEY_ID}${AWS_SECRET_ACCESS_KEY}" ]; then
