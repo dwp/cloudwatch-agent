@@ -15,10 +15,6 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/${TARGETARCH:-$(dpkg --print-architecture)}/latest/amazon-cloudwatch-agent.deb && \
     dpkg -i -E amazon-cloudwatch-agent.deb && \
-    rm -rf /tmp/* && \
-    rm -rf /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard && \
-    rm -rf /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl && \
-    rm -rf /opt/aws/amazon-cloudwatch-agent/bin/config-downloader && \
     mkdir cwagent
 
 COPY entrypoint.sh /bin/entrypoint.sh
