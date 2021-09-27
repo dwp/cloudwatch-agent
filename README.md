@@ -2,8 +2,6 @@
 
 ## This is the Docker image for CloudWatch Agent
 
-This repo contains Makefile, and Dockerfile to fit the standard pattern.
-This repo is a base to create new Docker image repos, adding the githooks submodule, making the repo ready for use.
+This is a containerised version of the [AWS CloudWatch Agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html).
 
-After cloning this repo, please run:  
-`make bootstrap`
+This image is currently unused and not maintained.
